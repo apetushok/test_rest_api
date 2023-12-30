@@ -3,7 +3,8 @@ version: '3.8'
 services:
   # PHP Service
   php:
-    image: php:8.2-fpm
+    build:
+      dockerfile: Php.DockerFile
     container_name: laravel_php
     volumes:
       - ./laravel:/var/www/html
