@@ -10,6 +10,8 @@ services:
       - ./laravel:/var/www/html
     networks:
       - laravel_network
+    depends_on:
+      - mysql
 
   # Nginx Service
   nginx:
@@ -32,6 +34,21 @@ services:
     container_name: laravel_redis
     ports:
       - "6379:6379"
+    networks:
+      - laravel_network
+
+  mysql:
+    image: mysql:latest
+    container_name: laravel_mysql
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
     networks:
       - laravel_network
 

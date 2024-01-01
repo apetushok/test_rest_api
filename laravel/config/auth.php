@@ -112,4 +112,10 @@ return [
 
     'password_timeout' => 10800,
 
+    'api' => [
+        'secret_token' => 'random_secret_token'
+    ],
+
+    'admin_email' => 'admin@admin.com',
+    'admin_password' => 'password',
 ];

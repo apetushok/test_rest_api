@@ -13,6 +13,9 @@ RUN apt-get update && \
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
+# Install PDO extension for MySQL
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
