@@ -64,4 +64,34 @@ class ScrapingJobService
         return false;
     }
 
+    public function setStatus( int $jobId, string $status ): bool
+    {
+        $hKey = "{$this->keyName}:{$jobId}";
+
+        if ( empty( $data ) || Redis::hlen( $hKey ) === 0 ) {
+            return false;
+        }
+
+        Redis::hset( $hKey, 'status', $status ) ;
+
+        return true;
+    }
+
+    public function setScrapedData( int $jobId, array $data ): bool
+    {
+        $hKey = "{$this->keyName}:{$jobId}";
+
+        if ( empty( $data ) || Redis::hlen( $hKey ) === 0 ) {
+            return false;
+        }
+
+        Redis::hset( $hKey, 'scraped_data', json_encode( $data ) ) ;
+
+        return true;
+    }
+
+    public function getLastId(): int
+    {
+        return (int)Redis::get( $this->counterName );
+    }
 }
