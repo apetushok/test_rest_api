@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\AuthController;
 Route::post( '/auth/login', [ AuthController::class, 'login' ] )->name( 'api-login' );
 
 Route::middleware( ['auth:sanctum'] )->name( 'api.' )->group( function () {
-    Route::get( '/jobs/{id}', [ JobController::class, 'show'] )->name( 'get-job' );
+    Route::get( '/jobs/{id}', [ JobController::class, 'show'] )->name( 'get-job' )->whereNumber('id');
     Route::post( '/jobs', [ JobController::class, 'store'] )->name( 'create-job' );
-    Route::delete( '/jobs/{id}', [ JobController::class, 'destroy' ] )->name( 'delete-job' );
+    Route::delete( '/jobs/{id}', [ JobController::class, 'destroy' ] )->name( 'delete-job' )->whereNumber('id');
 } );
